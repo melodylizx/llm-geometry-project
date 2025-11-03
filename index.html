@@ -30,12 +30,13 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <meta name="twitter:creator" content="@YOUR_TWITTER_HANDLE">
+  <meta name="twitter:site" content="@kumarkagrawal">
+  <meta name="twitter:creator" content="@kumarkagrawal">
   <meta name="twitter:title" content="Tracing the Representation Geometry of Language Models from Pretraining to Post-training">
   <meta name="twitter:description" content="We uncover a consistent non-monotonic sequence of three geometric phases during LLM pretraining through spectral analysis of representation geometry using RankMe and α-ReQ metrics.">
   <meta name="twitter:image" content="https://melodylizx.github.io/llm-geometry-project/static/images/social_preview.png">
   <meta name="twitter:image:alt" content="Tracing the Representation Geometry of Language Models - Research Preview">
+  <meta name="twitter:url" content="https://x.com/kumarkagrawal/status/1983977646620078398">
 
   <!-- Academic/Research Specific -->
   <meta name="citation_title" content="Tracing the Representation Geometry of Language Models from Pretraining to Post-training">
@@ -187,11 +188,11 @@
       color: var(--text-primary);
     }
 
-    /* Dark Mode Toggle Button */
-    .dark-mode-toggle {
+    /* Smaller figure captions */
     .subtitle {
-      font-size: 0.9rem !important;
+      font-size: 0.85rem !important;
       color: var(--text-secondary);
+      line-height: 1.4;
     }
     
     /* Smaller affiliation font */
@@ -206,13 +207,6 @@
     .publication-authors .eql-cntrb {
       font-size: 0.85rem !important;
     }
-      /* Smaller figure captions */
-    .subtitle {
-      font-size: 0.85rem !important;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
 
     /* Sticky Navigation */
     .sticky-nav {
@@ -272,127 +266,64 @@
       color: #3273dc;
     }
 
-/* Lightbox for Figures */
-.lightbox-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 2000;
-  cursor: zoom-out;
-  animation: fadeIn 0.3s ease;
-}
-
-.lightbox-overlay.active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.lightbox-content {
-  max-width: 95%;
-  max-height: 95%;
-  object-fit: contain;
-  animation: zoomIn 0.3s ease;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: white;
-  font-size: 36px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 2001;
-  transition: color 0.2s;
-}
-
-.lightbox-close:hover {
-  color: #ccc;
-}
-
-.clickable-figure {
-  cursor: zoom-in;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.clickable-figure:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-    
-    /* Lightbox for figures */
+    /* Lightbox for Figures */
     .lightbox-overlay {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.95);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
       z-index: 2000;
       cursor: zoom-out;
       animation: fadeIn 0.3s ease;
     }
-    
+
     .lightbox-overlay.active {
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
     }
-    
+
     .lightbox-content {
       max-width: 95%;
       max-height: 95%;
       object-fit: contain;
       animation: zoomIn 0.3s ease;
     }
-    
+
     .lightbox-close {
       position: absolute;
       top: 20px;
       right: 30px;
       color: white;
-      font-size: 40px;
+      font-size: 36px;
       font-weight: bold;
       cursor: pointer;
       z-index: 2001;
+      transition: color 0.2s;
     }
-    
+
     .lightbox-close:hover {
       color: #ccc;
     }
-    
+
     .clickable-figure {
       cursor: zoom-in;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    
+
     .clickable-figure:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transform: scale(1.03);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
-    
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    
+
     @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
+      from { transform: scale(0.85); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
     
@@ -977,6 +908,28 @@
       }
     });
   });
+  
+  // Copy BibTeX function
+  function copyBibTeX() {
+    const bibtexCode = document.getElementById('bibtex-code');
+    const textArea = document.createElement('textarea');
+    textArea.value = bibtexCode.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    
+    // Visual feedback
+    const copyBtn = document.querySelector('.copy-bibtex-btn');
+    const originalText = copyBtn.innerHTML;
+    copyBtn.innerHTML = '<i class="fas fa-check"></i> <span class="copy-text">Copied!</span>';
+    copyBtn.style.background = '#48c774';
+    
+    setTimeout(() => {
+      copyBtn.innerHTML = originalText;
+      copyBtn.style.background = '';
+    }, 2000);
+  }
 </script>
 
 </body>
