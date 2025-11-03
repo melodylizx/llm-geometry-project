@@ -206,64 +206,71 @@
     .publication-authors .eql-cntrb {
       font-size: 0.85rem !important;
     }
+      /* Smaller figure captions */
+    .subtitle {
+      font-size: 0.85rem !important;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
 
     /* Sticky Navigation */
-.sticky-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
-  padding: 12px 0;
-  transform: translateY(-100%);
-  transition: transform 0.35s ease, background 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform;
-}
-
-.sticky-nav.visible {
-  transform: translateY(0);
-}
-
-.sticky-nav .nav-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.sticky-nav .nav-title {
-  font-weight: 700;
-  font-size: 1rem;
-  color: #222;
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 400px;
-}
-
-.sticky-nav .nav-links {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-
-.sticky-nav .nav-links a {
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: color 0.2s ease;
-}
-
-.sticky-nav .nav-links a:hover {
-  color: #3273dc;
-}
+    .sticky-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 1000;
+      padding: 12px 0;
+      transform: translateY(-100%);
+      transition: transform 0.35s ease, background 0.3s ease, box-shadow 0.3s ease;
+      will-change: transform;
+    }
+    
+    .sticky-nav.visible {
+      transform: translateY(0);
+    }
+    
+    .sticky-nav .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .sticky-nav .nav-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #222;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 400px;
+    }
+    
+    .sticky-nav .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    
+    .sticky-nav .nav-links a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+    
+    .sticky-nav .nav-links a:hover {
+      color: #3273dc;
+    }
 
 /* Lightbox for Figures */
 .lightbox-overlay {
