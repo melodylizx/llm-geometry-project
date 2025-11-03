@@ -378,7 +378,7 @@
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
           <img src="static/images/figure2.jpeg" alt="Three geometric phases" style="max-width:90%; margin: 20px auto;">
-          <p class="subtitle"><strong>Figure 2:</strong> Non-monotonic spectral changes across three distinct geometric phases during pretraining.</p>
+          <p class="subtitle"><strong>Figure 2:</strong> Loss decreases monotonically, but representation geometry does not. (A) Schematic from Fig 1, for the pretraining stage. (B) Cross-entropy loss, gradient norm and learning rate schedule during OLMo-2 7B model pretraining. (C, D) RankMe and α-ReQ, respectively, for OLMo-2 7B model vary non-monotonically across pretraining, demonstrating three key phases: "warmup", "entropy-seeking", and "compression-seeking". (E, F) Same as C,D, but for Pythia models, demonstrating the consistent existence of the three phases across model families and scales.</p>
         </div>
       </div>
 
@@ -399,7 +399,7 @@
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
           <img src="static/images/figure3.jpeg" alt="Memorization vs generalization" style="max-width:90%; margin: 20px auto;">
-          <p class="subtitle"><strong>Figure 3:</strong> Different phases correlate with distinct behavioral patterns: memorization in entropy-seeking phase and generalization in compression-seeking phase.</p>
+          <p class="subtitle"><strong>Figure 3:</strong> Distinct learning phases are linked to different LLM capabilities. (A) Memorization metric, i.e. spearman correlation between LLM and ∞-gram outputs, and representation geometry metric, α-ReQ, across Pythia models' (1–12B parameters) pretraining. Memorization peaks late in the "entropy-seeking" phase before plateauing or degrading slightly in the "compression-seeking" phase, suggesting that the former prioritizes capturing short-context n-gram statistics. (B) 0-shot performance on multiple-choice (SciQ) and factual question-answering (TriviaQA) tasks across pretraining. While accuracy on SciQ benefits from learning in both phases, accuracy on TriviaQA groks once the model learns long-context statistics, primarily in the "compression-seeking" phase.</p>
         </div>
       </div>
 
@@ -420,7 +420,7 @@
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
           <img src="static/images/figure4.jpeg" alt="Post-training comparison" style="max-width:90%; margin: 20px auto;">
-          <p class="subtitle"><strong>Figure 4:</strong> Contrasting geometric changes in SFT/DPO (entropy-seeking) versus RLVR (compression-seeking) post-training.</p>
+          <p class="subtitle"><strong>Figure 4:</strong> Post-training induces distinct geometric transformations in model representations, aligned with specific behavioral changes. (A) Conceptual overview of post-training (SFT, DPO and RLVR) (top), corresponding RankMe metrics from intermediate checkpoints of Llama-3.1-Tülu-3.1-8B (bottom) highlighting distinct progression for each stage. (B) Impact of pretraining on OLMo-2-1B SFT (Anthropic-HH): (top) longer pretraining improves in-distribution (ID) performance, while out-of-distribution (OOD) generalization (Alpaca farm) saturates (bottom) Overtrained models with higher RankMe exhibit markedly distinct outputs on AlpacaEval after undergoing SFT on two different datasets (Anthropic-HH and Alpaca farm). (C) RLVR post-training narrows base model's (Llama-3.1-8B-Tülu-3-DPO) exploratory behavior on AMC-23 (particularly at higher sampling counts e.g. k = 256), suggesting higher effective-rank facilitates better search.</p>
         </div>
       </div>
 
@@ -434,7 +434,7 @@
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
           <img src="static/images/figure5.gif" alt="Toy model simulation" style="max-width:90%; margin: 20px auto;">
-          <p class="subtitle"><strong>Figure 5:</strong> Toy model simulations showing how gradient descent dynamics lead to non-monotonic spectral changes.</p>
+          <p class="subtitle"><strong>Figure 5:</strong> Learning dynamics of cross-entropy loss replicate multiphase learning dynamics. (A) Schematic of a model with feature extractor f<sub>θ</sub> (∈ R<sup>d</sup>), linear classifier W (∈ R<sup>n×d</sup>) and cross-entropy loss ℒ<sub>CE</sub>. Skewed class distribution and information bottleneck (d < n) are critical to replicate all three phases observed in LLM pretraining. (B, C) Classifier weights (W<sub>i</sub>) and feature representations (f<sub>θ</sub>(x)) demonstrate distinctive trajectories analogous to "warmup" (dotted), "entropy-seeking" (solid), and "compression-seeking" (dashed) phases. (D) Quantitative spectral metrics RankMe and eigenvalues, σ<sub>1</sub>, σ<sub>2</sub>.</p>
         </div>
       </div>
 
@@ -457,8 +457,8 @@
           </ul>
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
-          <img src="static/images/figure6.png" alt="Eigendirection analysis" style="max-width:90%; margin: 20px auto;">
-          <p class="subtitle"><strong>Figure 6:</strong> Task-relevant information is concentrated in the spectral tail rather than dominant eigendirections.</p>
+          <img src="static/images/figure6.png" alt="Eigendirection analysis table" style="max-width:90%; margin: 20px auto;">
+          <p class="subtitle"><strong>Table 1:</strong> Full-spectrum information is required. Retaining only top eigen-directions markedly degrades SciQ accuracy.</p>
         </div>
       </div>
 
@@ -466,11 +466,6 @@
   </div>
 </section>
 
-<!-- Results - Individual Figures -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Additional Results</h2>
 
 <!-- Video presentation (if available) -->
 <!-- Uncomment and update when you have a video
