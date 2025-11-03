@@ -98,6 +98,259 @@
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
   
+  <!-- Custom Styles for Enhanced Features -->
+  <style>
+    /* Dark Mode Variables */
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --text-primary: #363636;
+      --text-secondary: #666;
+      --border-color: #dbdbdb;
+      --shadow: rgba(0,0,0,0.1);
+      --shadow-hover: rgba(0,0,0,0.15);
+    }
+    
+    body.dark-mode {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #2d2d2d;
+      --text-primary: #e0e0e0;
+      --text-secondary: #b0b0b0;
+      --border-color: #404040;
+      --shadow: rgba(0,0,0,0.3);
+      --shadow-hover: rgba(0,0,0,0.5);
+    }
+    
+    body.dark-mode {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    body.dark-mode .hero.is-light {
+      background-color: var(--bg-secondary) !important;
+    }
+    
+    body.dark-mode .section, 
+    body.dark-mode .hero-body {
+      background-color: var(--bg-primary);
+    }
+    
+    body.dark-mode .title,
+    body.dark-mode .subtitle {
+      color: var(--text-primary) !important;
+    }
+    
+    body.dark-mode .content {
+      color: var(--text-primary);
+    }
+    
+    body.dark-mode .sticky-nav {
+      background: rgba(26, 26, 26, 0.98);
+    }
+    
+    body.dark-mode .sticky-nav .nav-title,
+    body.dark-mode .sticky-nav .nav-links a {
+      color: var(--text-primary);
+    }
+    
+    body.dark-mode footer {
+      background-color: var(--bg-secondary) !important;
+    }
+
+    /* Dark Mode Toggle Button */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: var(--bg-primary);
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px var(--shadow);
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px var(--shadow-hover);
+    }
+    
+    .dark-mode-toggle i {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    /* Dark Mode Toggle Button */
+    .dark-mode-toggle {
+    .subtitle {
+      font-size: 0.9rem !important;
+      color: var(--text-secondary);
+    }
+    
+    /* Smaller affiliation font */
+    .publication-authors {
+      font-size: 0.95rem !important;
+    }
+    
+    .publication-authors .author-block {
+      font-size: 0.9rem !important;
+    }
+    
+    .publication-authors .eql-cntrb {
+      font-size: 0.85rem !important;
+    }
+
+    /* Sticky Navigation */
+    .sticky-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 15px 0;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .sticky-nav.visible {
+      transform: translateY(0);
+    }
+    
+    .sticky-nav .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .sticky-nav .nav-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #363636;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 400px;
+    }
+    
+    .sticky-nav .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .sticky-nav .nav-links a {
+      color: #363636;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    
+    .sticky-nav .nav-links a:hover {
+      color: #3273dc;
+    }
+    
+    /* Lightbox for figures */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      cursor: zoom-out;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .lightbox-overlay.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .lightbox-content {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      animation: zoomIn 0.3s ease;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 2001;
+    }
+    
+    .lightbox-close:hover {
+      color: #ccc;
+    }
+    
+    .clickable-figure {
+      cursor: zoom-in;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .clickable-figure:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    /* Responsive adjustments */
+    @media screen and (max-width: 768px) {
+      .sticky-nav .nav-title {
+        font-size: 0.85rem;
+        max-width: 200px;
+      }
+      
+      .sticky-nav .nav-links {
+        gap: 10px;
+      }
+      
+      .sticky-nav .nav-links a {
+        font-size: 0.8rem;
+      }
+      
+      .dark-mode-toggle {
+        width: 45px;
+        height: 45px;
+        top: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+  
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
   {
@@ -200,6 +453,29 @@
 </head>
 <body>
 
+  <!-- Dark Mode Toggle -->
+  <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+    <i class="fas fa-moon" id="darkModeIcon"></i>
+  </button>
+
+  <!-- Sticky Navigation -->
+  <nav class="sticky-nav" id="stickyNav">
+    <div class="nav-content">
+      <div class="nav-title">LLM Representation Geometry | NeurIPS 2025</div>
+      <div class="nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#findings">Findings</a>
+        <a href="#BibTeX">Paper</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Lightbox Overlay for Images -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightboxImg">
+  </div>
 
   <!-- Scroll to Top Button -->
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
@@ -295,7 +571,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <!-- Replace with your teaser figure/video -->
-      <img src="static/images/figure0.jpg" alt="Three geometric phases of LLM pretraining" style="width:100%">
+      <img src="static/images/figure0.jpg" alt="Three geometric phases of LLM pretraining" class="clickable-figure" onclick="openLightbox(this.src)" style="width:100%">
       <h2 class="subtitle has-text-centered">
         We discover three distinct geometric phases during language model pretraining: warmup (representational collapse), entropy-seeking (dimensionality expansion with peak n-gram memorization), and compression-seeking (anisotropic consolidation leading to improved downstream performance).
       </h2>
@@ -305,7 +581,7 @@
 <!-- End teaser -->
 
 <!-- Paper abstract -->
-<section class="section hero is-light">
+<section class="section hero is-light" id="abstract">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -325,7 +601,7 @@
 <!-- End paper abstract -->
 
 <!-- Method Overview -->
-<section class="section hero is-light">
+<section class="section hero is-light" id="method">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -350,7 +626,7 @@
     <!-- Method Figure 1 -->
     <div class="columns is-centered has-text-centered" style="margin-top: 30px;">
       <div class="column is-four-fifths">
-        <img src="static/images/figure1.jpeg" alt="Method visualization" style="max-width:100%; margin: 20px auto;">
+        <img src="static/images/figure1.jpeg" alt="Method visualization" class="clickable-figure" onclick="openLightbox(this.src)" style="max-width:100%; margin: 20px auto;">
         <p class="subtitle"><strong>Figure 1:</strong> Spectral framework reveals three universal phases in LLM training. (A) LLM representations analyzed via empirical feature covariance Σ̂(f<sub>θ</sub>) of last-token hidden states f<sub>θ</sub>(x<sub>i</sub>). (B) Two complementary spectral metrics: α-ReQ measures eigenspectrum decay rate (variance concentration), while RankMe quantifies effective rank (utilized dimensionality).</p>
       </div>
     </div>
@@ -358,13 +634,25 @@
 </section>
 
 <!-- Key Findings Section -->
-<section class="hero is-small">
+<section class="hero is-small" id="findings">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Key Findings</h2>
       
+      <!-- Quick Navigation -->
+      <div class="content has-text-centered" style="margin-bottom: 40px; padding: 20px; background-color: #f5f5f5; border-radius: 8px;">
+        <p style="margin-bottom: 15px; font-weight: 600; color: #363636;">Jump to:</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+          <a href="#finding1" class="button is-small is-link is-light">🔄 Three Geometric Phases</a>
+          <a href="#finding2" class="button is-small is-link is-light">📊 Memorization vs Generalization</a>
+          <a href="#finding3" class="button is-small is-link is-light">🎯 Post-training Analysis</a>
+          <a href="#finding4" class="button is-small is-link is-light">🔬 Why These Phases Arise</a>
+          <a href="#finding5" class="button is-small is-link is-light">💡 Spectral Tail Information</a>
+        </div>
+      </div>
+      
       <!-- Finding 1: Three Geometric Phases -->
-      <div class="content" style="margin-bottom: 50px;">
+      <div id="finding1" class="content" style="margin-bottom: 50px; scroll-margin-top: 80px;">
         <h3 class="title is-4">🔄 Three Geometric Phases</h3>
         <div class="content has-text-justified">
           <p>
@@ -377,13 +665,13 @@
           </ul>
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
-          <img src="static/images/figure2.jpeg" alt="Three geometric phases" style="max-width:90%; margin: 20px auto;">
+          <img src="static/images/figure2.jpeg" alt="Three geometric phases" class="clickable-figure" onclick="openLightbox(this.src)" style="max-width:90%; margin: 20px auto;">
           <p class="subtitle"><strong>Figure 2:</strong> Loss decreases monotonically, but representation geometry does not. (A) Schematic from Fig 1, for the pretraining stage. (B) Cross-entropy loss, gradient norm and learning rate schedule during OLMo-2 7B model pretraining. (C, D) RankMe and α-ReQ, respectively, for OLMo-2 7B model vary non-monotonically across pretraining, demonstrating three key phases: "warmup", "entropy-seeking", and "compression-seeking". (E, F) Same as C,D, but for Pythia models, demonstrating the consistent existence of the three phases across model families and scales.</p>
         </div>
       </div>
 
       <!-- Finding 2: Memorization vs Generalization -->
-      <div class="content" style="margin-bottom: 50px;">
+      <div id="finding2" class="content" style="margin-bottom: 50px; scroll-margin-top: 80px;">
         <h3 class="title is-4">📊 Memorization vs Generalization Across Phases</h3>
         <div class="content has-text-justified">
           <p>
@@ -398,13 +686,13 @@
           </ul>
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
-          <img src="static/images/figure3.jpeg" alt="Memorization vs generalization" style="max-width:90%; margin: 20px auto;">
+          <img src="static/images/figure3.jpeg" alt="Memorization vs generalization" class="clickable-figure" onclick="openLightbox(this.src)" style="max-width:90%; margin: 20px auto;">
           <p class="subtitle"><strong>Figure 3:</strong> Distinct learning phases are linked to different LLM capabilities. (A) Memorization metric, i.e. spearman correlation between LLM and ∞-gram outputs, and representation geometry metric, α-ReQ, across Pythia models' (1–12B parameters) pretraining. Memorization peaks late in the "entropy-seeking" phase before plateauing or degrading slightly in the "compression-seeking" phase, suggesting that the former prioritizes capturing short-context n-gram statistics. (B) 0-shot performance on multiple-choice (SciQ) and factual question-answering (TriviaQA) tasks across pretraining. While accuracy on SciQ benefits from learning in both phases, accuracy on TriviaQA groks once the model learns long-context statistics, primarily in the "compression-seeking" phase.</p>
         </div>
       </div>
 
       <!-- Finding 3: Post-training -->
-      <div class="content" style="margin-bottom: 50px;">
+      <div id="finding3" class="content" style="margin-bottom: 50px; scroll-margin-top: 80px;">
         <h3 class="title is-4">🎯 Post-training: SFT/DPO vs RLVR</h3>
         <div class="content has-text-justified">
           <p>
@@ -419,13 +707,13 @@
           </p>
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
-          <img src="static/images/figure4.jpeg" alt="Post-training comparison" style="max-width:90%; margin: 20px auto;">
+          <img src="static/images/figure4.jpeg" alt="Post-training comparison" class="clickable-figure" onclick="openLightbox(this.src)" style="max-width:90%; margin: 20px auto;">
           <p class="subtitle"><strong>Figure 4:</strong> Post-training induces distinct geometric transformations in model representations, aligned with specific behavioral changes. (A) Conceptual overview of post-training (SFT, DPO and RLVR) (top), corresponding RankMe metrics from intermediate checkpoints of Llama-3.1-Tülu-3.1-8B (bottom) highlighting distinct progression for each stage. (B) Impact of pretraining on OLMo-2-1B SFT (Anthropic-HH): (top) longer pretraining improves in-distribution (ID) performance, while out-of-distribution (OOD) generalization (Alpaca farm) saturates (bottom) Overtrained models with higher RankMe exhibit markedly distinct outputs on AlpacaEval after undergoing SFT on two different datasets (Anthropic-HH and Alpaca farm). (C) RLVR post-training narrows base model's (Llama-3.1-8B-Tülu-3-DPO) exploratory behavior on AMC-23 (particularly at higher sampling counts e.g. k = 256), suggesting higher effective-rank facilitates better search.</p>
         </div>
       </div>
 
       <!-- Finding 4: Why do these phases arise? -->
-      <div class="content" style="margin-bottom: 50px;">
+      <div id="finding4" class="content" style="margin-bottom: 50px; scroll-margin-top: 80px;">
         <h3 class="title is-4">🔬 Why Do These Geometric Phases Arise?</h3>
         <div class="content has-text-justified">
           <p>
@@ -433,13 +721,13 @@
           </p>
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
-          <img src="static/images/figure5.gif" alt="Toy model simulation" style="max-width:90%; margin: 20px auto;">
+          <img src="static/images/figure5.gif" alt="Toy model simulation" class="clickable-figure" onclick="openLightbox(this.src)" style="max-width:90%; margin: 20px auto;">
           <p class="subtitle"><strong>Figure 5:</strong> Learning dynamics of cross-entropy loss replicate multiphase learning dynamics. (A) Schematic of a model with feature extractor f<sub>θ</sub> (∈ R<sup>d</sup>), linear classifier W (∈ R<sup>n×d</sup>) and cross-entropy loss ℒ<sub>CE</sub>. Skewed class distribution and information bottleneck (d < n) are critical to replicate all three phases observed in LLM pretraining. (B, C) Classifier weights (W<sub>i</sub>) and feature representations (f<sub>θ</sub>(x)) demonstrate distinctive trajectories analogous to "warmup" (dotted), "entropy-seeking" (solid), and "compression-seeking" (dashed) phases. (D) Quantitative spectral metrics RankMe and eigenvalues, σ<sub>1</sub>, σ<sub>2</sub>.</p>
         </div>
       </div>
 
       <!-- Finding 5: Task-relevant information in eigendirections -->
-      <div class="content" style="margin-bottom: 50px;">
+      <div id="finding5" class="content" style="margin-bottom: 50px; scroll-margin-top: 80px;">
         <h3 class="title is-4">💡 Task-Relevant Information in Spectral Tail</h3>
         <div class="content has-text-justified">
           <p>
@@ -457,7 +745,7 @@
           </ul>
         </div>
         <div class="content has-text-centered" style="margin-top: 30px;">
-          <img src="static/images/figure6.png" alt="Eigendirection analysis table" style="max-width:90%; margin: 20px auto;">
+          <img src="static/images/figure6.png" alt="Eigendirection analysis table" class="clickable-figure" onclick="openLightbox(this.src)" style="max-width:90%; margin: 20px auto;">
           <p class="subtitle"><strong>Table 1:</strong> Full-spectrum information is required. Retaining only top eigen-directions markedly degrades SciQ accuracy.</p>
         </div>
       </div>
@@ -536,6 +824,91 @@
 <!-- Statcounter tracking code -->
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 <!-- End of Statcounter Code -->
+
+<!-- Custom JavaScript for Enhanced Features -->
+<script>
+  // Dark Mode Toggle
+  function toggleDarkMode() {
+    const body = document.body;
+    const icon = document.getElementById('darkModeIcon');
+    
+    body.classList.toggle('dark-mode');
+    
+    // Update icon
+    if (body.classList.contains('dark-mode')) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('darkMode', 'disabled');
+    }
+  }
+  
+  // Check for saved dark mode preference on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const darkMode = localStorage.getItem('darkMode');
+    const icon = document.getElementById('darkModeIcon');
+    
+    if (darkMode === 'enabled') {
+      document.body.classList.add('dark-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  });
+  
+  // Sticky Navigation
+  window.addEventListener('scroll', function() {
+    const nav = document.getElementById('stickyNav');
+    if (window.scrollY > 300) {
+      nav.classList.add('visible');
+    } else {
+      nav.classList.remove('visible');
+    }
+  });
+  
+  // Lightbox Functions
+  function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    lightboxImg.src = src;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  }
+  
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+  }
+  
+  // Close lightbox on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+  
+  // Smooth scroll to sections
+  function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
